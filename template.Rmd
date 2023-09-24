@@ -1,0 +1,61 @@
+---
+title: "Simple document"
+output: github_document
+---
+```{r}
+library(tidyverse)
+
+```
+
+Let's import the `FAS_litters.csv` csv.
+
+```{r}
+litters_df = 
+  read_csv("Data/FAS_litters.csv")
+
+litters_df =
+  janitor::clean_names(litters_df)
+
+# Cleaning the names using the janitor package
+```
+
+Import the same dataset using the absolute path
+```{r}
+
+# Absolute path
+litters_df_abs = 
+  read_csv("/Users/BettyWu/Desktop/Columbia/Intro to DS/data_wrangling_i/Data/FAS_litters.csv")
+
+litters_df_abs =
+  janitor::clean_names(litters_df_abs)
+
+```
+
+Import pups dataset
+```{r}
+pups_df = 
+  read_csv("Data/FAS_pups.csv")
+
+pups_df =
+  janitor::clean_names(pups_df)
+```
+
+## Look at data
+
+```{r}
+litters_df
+
+head(litters_df)
+tail(litters_df)
+```
+
+you can use `view`
+```{r, eval = FALSE}
+view(litters_df)
+```
+
+Look at a data summary
+```{r}
+str(litters_df)
+skimr::skim(litters_df)
+```
