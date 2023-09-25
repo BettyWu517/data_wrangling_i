@@ -7,3 +7,60 @@ library(tidyverse)
 
 ```
 
+```{r}
+litters_df =
+  read_csv("data/FAS_litters.csv")
+litters_df = janitor::clean_names(litters_df)
+
+pups_df = 
+  read_csv("Data/FAS_pups.csv")
+
+pups_df =
+  janitor::clean_names(pups_df)
+
+```
+
+## `Select`
+
+`Select` is used to select columns!
+```{r}
+
+select(litters_df, group, litter_number, gd0_weight)
+
+select(litters_df, gd0_weight, group)
+
+select(litters_df, group, gd0_weight:gd_of_birth)
+
+select(litters_df, group, starts_with("pups"))
+
+select(litters_df, -litter_number)
+# 减掉start with gd的
+select(litters_df, -starts_with("gd"))
+
+select(litters_df, group, litter_id = litter_number)
+
+# renaming litter_id to litter_number, have everything follows
+select(litters_df, litter_id = litter_number, everything())
+
+#have gd0_weight first, keep everything else in my dataset
+select(litters_df, gd0_weight, everything())
+```
+
+`select` vs `pull`
+
+```{r}
+select(litters_df, group)
+# extracting things out of the dataframe
+pull(litters_df, group)
+```
+
+```{r}
+rename(litters_df, litter_id = litter_number)
+
+relocate(litters_df, litter_number)
+```
+
+```{r}
+select(pups_df, litter_number, sex, pd_ears)
+```
+
