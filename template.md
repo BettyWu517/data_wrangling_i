@@ -16,6 +16,11 @@ library(tidyverse)
     ## ✖ dplyr::lag()    masks stats::lag()
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
+``` r
+library(readxl)
+library(haven)
+```
+
 Let’s import the `FAS_litters.csv` csv.
 
 ``` r
@@ -246,3 +251,48 @@ litters_df =
 ```
 
     ## Warning: The following named parsers don't match the column names: GD0 Weight
+
+## Other file types
+
+import a xlsx file first
+
+``` r
+mlb_df = 
+  read_excel("Data/mlb11.xlsx")
+```
+
+Import a SAS file
+
+``` r
+pulse_df = 
+  read_sas("Data/public_pulse_data.sas7bdat")
+```
+
+## Base R …
+
+don’t do this
+
+``` r
+#litter_df = read.csv("Data/FAS_litter.csv")
+```
+
+``` r
+litters_df_cleaned = 
+  read_csv("Data/FAS_litters.csv")
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+litters_df_cleaned =
+  janitor::clean_names(litters_df_cleaned)
+
+write_csv(litters_df_cleaned, "Data/litters_cleaned.csv")
+```

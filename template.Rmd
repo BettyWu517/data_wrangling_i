@@ -4,6 +4,8 @@ output: github_document
 ---
 ```{r}
 library(tidyverse)
+library(readxl)
+library(haven)
 
 ```
 
@@ -82,5 +84,39 @@ Column types
 litters_df = 
   read_csv("Data/FAS_litters.csv",
            col_types = cols(`GD0 Weight` = col_character()))
+```
+
+## Other file types
+
+import a xlsx file first
+
+```{r}
+mlb_df = 
+  read_excel("Data/mlb11.xlsx")
+
+```
+
+Import a SAS file
+```{r}
+pulse_df = 
+  read_sas("Data/public_pulse_data.sas7bdat")
+
+```
+
+## Base R ...
+
+don't do this
+```{r}
+#litter_df = read.csv("Data/FAS_litter.csv")
+```
+
+```{r}
+litters_df_cleaned = 
+  read_csv("Data/FAS_litters.csv")
+
+litters_df_cleaned =
+  janitor::clean_names(litters_df_cleaned)
+
+write_csv(litters_df_cleaned, "Data/litters_cleaned.csv")
 
 ```
